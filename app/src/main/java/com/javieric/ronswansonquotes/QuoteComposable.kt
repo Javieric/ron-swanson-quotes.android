@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +35,7 @@ fun QuoteComposable(
                 .testTag("openQuotesImage"),
             painter = painterResource(id = R.drawable.ic_quotation_marks_1),
             contentDescription = "open quotes",
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.primary),
         )
 
         Text(
@@ -43,7 +45,8 @@ fun QuoteComposable(
                 .testTag("quoteText"),
             text = quote,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h1,
+            color = MaterialTheme.colors.primary,
         )
 
         Image(
@@ -54,6 +57,7 @@ fun QuoteComposable(
                 .testTag("closeQuotesImage"),
             painter = painterResource(id = R.drawable.ic_quotation_marks_2),
             contentDescription = "close quotes",
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.primary),
         )
     }
 }

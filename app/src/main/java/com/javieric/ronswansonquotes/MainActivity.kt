@@ -13,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -79,6 +80,7 @@ private fun QuotesUI(quoteState: QuoteState?,
                     .padding(48.dp),
                     painter = painterResource(id = R.drawable.ic_ron_swanson),
                 contentDescription = "logo",
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.primary),
             )
 
             Box(modifier = Modifier.fillMaxWidth().height(300.dp)) {
