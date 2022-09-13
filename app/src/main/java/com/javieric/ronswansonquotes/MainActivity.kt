@@ -7,12 +7,12 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,13 +45,42 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         var quoteState: QuoteState?
 
+        val newQuoteMenuIcon = ButtonPanelItem(
+            title = "New Quote",
+            image = Icons.Default.Refresh,
+            onClick = { viewModel.requestQuote() }
+        )
+
+        val copyMenuIcon = ButtonPanelItem(
+            title = "Copy",
+            image = Icons.Default.Edit,
+            onClick = {  }
+        )
+
+        val shareMenuIcon = ButtonPanelItem(
+            title = "Share",
+            image = Icons.Default.Share,
+            onClick = {  }
+        )
+
+        val favouriteMenuIcon = ButtonPanelItem(
+            title = "Favourite",
+            image = Icons.Default.Favorite,
+            onClick = {  }
+        )
+
+        val menuIconList = listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, favouriteMenuIcon)
+
         lifecycleScope.launchWhenCreated {
             viewModel.quoteState.collect {
                 quoteState = it
 
                 setContent {
                     RonSwansonQuotesTheme {
-                        QuotesUI(quoteState) { viewModel.requestQuote() }
+                        QuotesUI(
+                            quoteState = quoteState,
+                            menuIconList = menuIconList
+                        )
                     }
                 }
             }
@@ -61,8 +90,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-private fun QuotesUI(quoteState: QuoteState?,
-                     onClick: ()->Unit
+private fun QuotesUI(
+    quoteState: QuoteState?,
+    menuIconList: List<ButtonPanelItem> = emptyList()
 ) {
 
     Surface(
@@ -83,7 +113,9 @@ private fun QuotesUI(quoteState: QuoteState?,
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.primary),
             )
 
-            Box(modifier = Modifier.fillMaxWidth().height(300.dp)) {
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .height(300.dp)) {
 
                 AnimatedContent(
                     targetState = quoteState,
@@ -105,22 +137,10 @@ private fun QuotesUI(quoteState: QuoteState?,
                 }
             }
 
-            Button(
-                modifier = Modifier
-                    .defaultMinSize(
-                        minHeight = 32.dp,
-                        minWidth = 104.dp,
-                    )
-                    .clickable { onClick() },
-                onClick = {
-                    onClick()
-                },
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = Color.Red
-                )
-            ) {
-                Text("New Quote")
-            }
+            ButtonPanelComposable(
+                modifier = Modifier.fillMaxWidth(),
+                items = menuIconList
+            )
         }
     }
 }
@@ -141,26 +161,102 @@ private fun loadingAnimation() = fadeIn(
             targetOffsetX = { fullWidth -> -fullWidth }
         )
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun LoadingPreview() {
     RonSwansonQuotesTheme {
-        QuotesUI(quoteState = QuoteState.Loading) { null }
+        QuotesUI(
+            quoteState = QuoteState.Loading,
+            menuIconList = generateMenuIcons(),
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun SuccessPreview() {
     RonSwansonQuotesTheme {
-        QuotesUI(quoteState = QuoteState.Success(quote = "new quote")) { null }
+        QuotesUI(
+            quoteState = QuoteState.Success(quote = "new quote"),
+            menuIconList = generateMenuIcons(),
+        )
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun ErrorPreview() {
     RonSwansonQuotesTheme {
-        QuotesUI(quoteState = QuoteState.Error(message = "error message")) { null }
+        QuotesUI(
+            quoteState = QuoteState.Error(message = "error message"),
+            menuIconList = generateMenuIcons(),
+        )
     }
+}
+
+@Preview
+@Composable
+fun LoadingDarkThemePreview() {
+    RonSwansonQuotesTheme(
+        darkTheme = true
+    ) {
+        QuotesUI(
+            quoteState = QuoteState.Loading,
+            menuIconList = generateMenuIcons(),
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SuccessDarkThemePreview() {
+    RonSwansonQuotesTheme(
+        darkTheme = true
+    ) {
+        QuotesUI(
+            quoteState = QuoteState.Success(quote = "new quote"),
+            menuIconList = generateMenuIcons(),
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ErrorDarkThemePreview() {
+    RonSwansonQuotesTheme(
+        darkTheme = true
+    ) {
+        QuotesUI(
+            quoteState = QuoteState.Error(message = "error message"),
+            menuIconList = generateMenuIcons(),
+        )
+    }
+}
+
+private fun generateMenuIcons(): List<ButtonPanelItem> {
+    val newQuoteMenuIcon = ButtonPanelItem(
+        title = "New Quote",
+        image = Icons.Default.Refresh,
+        onClick = {  }
+    )
+
+    val copyMenuIcon = ButtonPanelItem(
+        title = "Copy",
+        image = Icons.Default.Edit,
+        onClick = {  }
+    )
+
+    val shareMenuIcon = ButtonPanelItem(
+        title = "Share",
+        image = Icons.Default.Share,
+        onClick = {  }
+    )
+
+    val favouriteMenuIcon = ButtonPanelItem(
+        title = "Favourite",
+        image = Icons.Default.Favorite,
+        onClick = {  }
+    )
+
+    return listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, favouriteMenuIcon)
 }
