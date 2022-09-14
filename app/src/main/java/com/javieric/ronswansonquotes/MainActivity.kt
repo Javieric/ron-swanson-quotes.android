@@ -1,6 +1,7 @@
 package com.javieric.ronswansonquotes
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         var quoteState: QuoteState?
 
+        viewModel.clipboardLiveData.observe(this) {
+            onQuoteCopiedToClipboard()
+        }
+
         val newQuoteMenuIcon = ButtonPanelItem(
             title = "New Quote",
             image = Icons.Default.Refresh,
@@ -54,7 +60,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val copyMenuIcon = ButtonPanelItem(
             title = "Copy",
             image = Icons.Default.Edit,
-            onClick = {  }
+            onClick = { viewModel.copyToClipboard(this) }
         )
 
         val shareMenuIcon = ButtonPanelItem(
@@ -85,6 +91,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 }
             }
         }
+    }
+
+    private fun onQuoteCopiedToClipboard() {
+
+        Toast.makeText(this, getString(R.string.copied_to_clipboard), Toast.LENGTH_LONG).show()
     }
 }
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ron Swanson Quotes</string>
+    <string name="copied_to_clipboard">Quote copied to clipboard</string>
 </resources>
