@@ -20,7 +20,7 @@ class MainViewModel (
     private var _quoteState = MutableStateFlow<QuoteState>(QuoteState.Loading)
     val quoteState: StateFlow<QuoteState> = _quoteState
 
-    var clipboardLiveData = MutableLiveData(false)
+    var clipboardLiveData: MutableLiveData<Boolean?> = MutableLiveData()
 
     init {
 
@@ -46,11 +46,17 @@ class MainViewModel (
 
         if (quoteState.value is QuoteState.Success) {
 
-            val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("text", (quoteState.value as QuoteState.Success).quote)
-            clipboardManager.setPrimaryClip(clipData)
+            (quoteState.value as? QuoteState.Success)?.quote?.let {
 
-            clipboardLiveData.value = true
+                val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clipData = ClipData.newPlainText("text", "\"$it\" - Ron Swanson")
+
+                clipData?.let {
+                    clipboardManager.setPrimaryClip(it)
+                }
+
+                clipboardLiveData.value = true
+            }
         }
     }
 }

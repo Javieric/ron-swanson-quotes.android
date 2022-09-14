@@ -1,5 +1,6 @@
 package com.javieric.ronswansonquotes
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
@@ -9,16 +10,19 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
@@ -66,7 +70,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val shareMenuIcon = ButtonPanelItem(
             title = "Share",
             image = Icons.Default.Share,
-            onClick = {  }
+            onClick = { share() }
         )
 
         val favouriteMenuIcon = ButtonPanelItem(
@@ -89,6 +93,24 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                         )
                     }
                 }
+            }
+        }
+    }
+
+    private fun share() {
+
+        if (viewModel.quoteState.value is QuoteState.Success) {
+
+            (viewModel.quoteState.value as? QuoteState.Success)?.quote?.let {
+
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "\"$it\" - Ron Swanson")
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
         }
     }
