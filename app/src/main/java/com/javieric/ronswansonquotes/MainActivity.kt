@@ -73,13 +73,13 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             onClick = { share() }
         )
 
-        val favouriteMenuIcon = ButtonPanelItem(
-            title = "Favourite",
-            image = Icons.Default.Favorite,
-            onClick = {  }
-        )
+//        val favouriteMenuIcon = ButtonPanelItem(
+//            title = "Favourite",
+//            image = Icons.Default.Favorite,
+//            onClick = {  }
+//        )
 
-        val menuIconList = listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, favouriteMenuIcon)
+        val menuIconList = listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, /*favouriteMenuIcon*/)
 
         lifecycleScope.launchWhenCreated {
             viewModel.quoteState.collect {
@@ -291,5 +291,5 @@ private fun generateMenuIcons(): List<ButtonPanelItem> {
         onClick = {  }
     )
 
-    return listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, favouriteMenuIcon)
+    return listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon/*, favouriteMenuIcon*/)
 }
