@@ -23,7 +23,7 @@ fun ButtonComposable(
 ) {
 
     IconButton(
-        modifier = Modifier.padding(20.dp),
+        modifier = Modifier.testTag("iconButton_$title").padding(20.dp),
         onClick = { onClick() },
     ) {
         Icon(

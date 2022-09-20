@@ -1,7 +1,6 @@
 package com.javieric.ronswansonquotes
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
@@ -11,24 +10,21 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class ErrorMessageComposableKtTest {
+class LoadingQuoteComposableTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
     @Test
-    fun testWhenStatusIsErrorThenTextShowsExpectedString() {
-
-        val errorMessage = "error message"
+    fun testWhenStatusIsLoadingThenLoadingIndicatorIsDisplayed() {
 
         composeTestRule.setContent {
             RonSwansonQuotesTheme {
-                ErrorMessageComposable(message = errorMessage)
+                LoadingQuoteComposable()
             }
         }
 
-        composeTestRule.onNode(hasTestTag("quoteText"))
+        composeTestRule.onNode(hasTestTag("loadingIndicator"))
             .assertIsDisplayed()
-            .assertTextEquals(errorMessage)
     }
 }

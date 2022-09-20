@@ -9,7 +9,7 @@ import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
 import org.junit.Test
 
 @RunWith(JUnit4::class)
-class QuoteComposableKtTest {
+class QuoteComposableTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
