@@ -166,6 +166,7 @@ private fun QuotesUI(
                         is QuoteState.Success -> QuoteComposable(modifier = Modifier.fillMaxWidth(), quote = targetState.quote)
                         is QuoteState.Loading -> LoadingQuoteComposable()
                         is QuoteState.Error -> ErrorMessageComposable(modifier = Modifier.fillMaxWidth(), message = targetState.message)
+                        else -> {}
                     }
                 }
             }
