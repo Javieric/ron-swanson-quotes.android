@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes.theme
+package com.javieric.composables.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

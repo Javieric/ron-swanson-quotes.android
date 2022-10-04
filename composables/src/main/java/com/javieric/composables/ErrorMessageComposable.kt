@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes
+package com.javieric.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
+import com.javieric.composables.theme.RonSwansonQuotesTheme
 
 @Composable
 fun ErrorMessageComposable(

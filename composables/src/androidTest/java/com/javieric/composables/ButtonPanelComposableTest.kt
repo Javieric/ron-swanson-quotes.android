@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes
+package com.javieric.composables
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -9,7 +9,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
+import com.javieric.composables.theme.RonSwansonQuotesTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

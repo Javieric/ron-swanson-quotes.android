@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes
+package com.javieric.composables
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
+import com.javieric.composables.theme.RonSwansonQuotesTheme
 
 @Composable
 fun ButtonComposable(

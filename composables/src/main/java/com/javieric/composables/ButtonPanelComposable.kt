@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes
+package com.javieric.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
+import com.javieric.composables.theme.RonSwansonQuotesTheme
 
 @Composable
 fun ButtonPanelComposable(

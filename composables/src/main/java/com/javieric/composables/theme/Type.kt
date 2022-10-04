@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes.theme
+package com.javieric.composables.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.javieric.ronswansonquotes.R
+import com.javieric.composables.R
 
 
 val fonts = FontFamily(

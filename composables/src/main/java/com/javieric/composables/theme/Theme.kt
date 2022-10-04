@@ -1,4 +1,4 @@
-package com.javieric.ronswansonquotes.theme
+package com.javieric.composables.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

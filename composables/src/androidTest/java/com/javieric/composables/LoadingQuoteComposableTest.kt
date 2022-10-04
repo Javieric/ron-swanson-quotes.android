@@ -1,34 +1,30 @@
-package com.javieric.ronswansonquotes
+package com.javieric.composables
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.javieric.ronswansonquotes.theme.RonSwansonQuotesTheme
+import com.javieric.composables.theme.RonSwansonQuotesTheme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class ErrorMessageComposableTest {
+class LoadingQuoteComposableTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
     @Test
-    fun testWhenStatusIsErrorThenTextShowsExpectedString() {
-
-        val errorMessage = "error message"
+    fun testWhenStatusIsLoadingThenLoadingIndicatorIsDisplayed() {
 
         composeTestRule.setContent {
             RonSwansonQuotesTheme {
-                ErrorMessageComposable(message = errorMessage)
+                LoadingQuoteComposable()
             }
         }
 
-        composeTestRule.onNode(hasTestTag("quoteText"))
+        composeTestRule.onNode(hasTestTag("loadingIndicator"))
             .assertIsDisplayed()
-            .assertTextEquals(errorMessage)
     }
 }
