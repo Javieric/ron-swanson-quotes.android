@@ -1,5 +1,6 @@
 package com.javieric.ronswansonquotes.di
 
+import android.app.Application
 import com.javieric.ronswansonquotes.*
 import dagger.Module
 import dagger.Provides
@@ -8,11 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class ApplicationModule {
-
-    @Provides
-    fun providesMainViewModel(quotesUseCase: IQuotesUseCase): MainViewModel {
-        return MainViewModel(quotesUseCase)
-    }
 
     @Provides
     fun providesQuotesUseCase(quotesAPIService: IQuotesAPIService): IQuotesUseCase {

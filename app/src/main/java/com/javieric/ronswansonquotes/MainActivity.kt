@@ -23,21 +23,21 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.javieric.composables.*
-import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import com.javieric.composables.theme.RonSwansonQuotesTheme
+import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
 
-    @Inject
-    lateinit var viewModel: MainViewModel
-//    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job

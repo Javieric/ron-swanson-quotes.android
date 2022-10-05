@@ -1,21 +1,26 @@
 package com.javieric.ronswansonquotes
 
+import android.app.Application
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class MainViewModel (
-    private val quotesUseCase: IQuotesUseCase,
-): ViewModel() {
+    application: Application
+): AndroidViewModel(application) {
+
+    @Inject
+    lateinit var quotesUseCase: IQuotesUseCase
 
     private var _quoteState = MutableStateFlow<QuoteState>(QuoteState.Loading)
     val quoteState: StateFlow<QuoteState> = _quoteState
@@ -30,6 +35,8 @@ class MainViewModel (
     }
 
     fun requestQuote() {
+
+        if (NetworkUtils.checkInternetConnection(getApplication()))
         viewModelScope.launch(Dispatchers.IO) {
 
             _quoteState.value = QuoteState.Loading
