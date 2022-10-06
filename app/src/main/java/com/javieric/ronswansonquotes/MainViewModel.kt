@@ -36,16 +36,20 @@ class MainViewModel (
 
     fun requestQuote() {
 
-        if (NetworkUtils.checkInternetConnection(getApplication()))
-        viewModelScope.launch(Dispatchers.IO) {
+        if (NetworkUtils.checkInternetConnection(getApplication())) {
 
-            _quoteState.value = QuoteState.Loading
-            _quoteState.value = try {
+            viewModelScope.launch(Dispatchers.IO) {
+
+                _quoteState.value = QuoteState.Loading
+                _quoteState.value = try {
 //                delay(1000)
-                QuoteState.Success(quotesUseCase.requestQuote())
-            } catch (e: Exception) {
-                QuoteState.Error("error: ${e.message}")
+                    QuoteState.Success(quotesUseCase.requestQuote())
+                } catch (e: Exception) {
+                    QuoteState.Error("error: ${e.message}")
+                }
             }
+        } else {
+            _quoteState.value = QuoteState.ConnectionError
         }
     }
 
