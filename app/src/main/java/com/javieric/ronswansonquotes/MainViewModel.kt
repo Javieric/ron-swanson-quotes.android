@@ -9,9 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -29,36 +31,45 @@ class MainViewModel (
 
     init {
 
+        Timber.d("init()")
         DaggerApplicationComponent.builder().build().inject(this)
-
         requestQuote()
     }
 
     fun requestQuote() {
 
+        Timber.d("requestQuote()")
         if (NetworkUtils.checkInternetConnection(getApplication())) {
 
+            _quoteState.value = QuoteState.Loading
             viewModelScope.launch(Dispatchers.IO) {
 
-                _quoteState.value = QuoteState.Loading
                 _quoteState.value = try {
-//                delay(1000)
+//                    delay(1000)
+
+                    Timber.d("requestQuote() - requesting quote")
                     QuoteState.Success(quotesUseCase.requestQuote())
                 } catch (e: Exception) {
+
+                    Timber.d("requestQuote() - error: ${e.message}")
                     QuoteState.Error("error: ${e.message}")
                 }
             }
         } else {
+
+            Timber.d("requestQuote() - connection error")
             _quoteState.value = QuoteState.ConnectionError
         }
     }
 
     fun copyToClipboard(context: Context) {
 
+        Timber.d("copyToClipboard()")
         if (quoteState.value is QuoteState.Success) {
 
             (quoteState.value as? QuoteState.Success)?.quote?.let {
 
+                Timber.d("copyToClipboard() - quote: $it")
                 val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clipData = ClipData.newPlainText("text", "\"$it\" - Ron Swanson")
 
@@ -67,6 +78,7 @@ class MainViewModel (
                 }
 
                 clipboardLiveData.value = true
+                Timber.d("copyToClipboard() - quote copied to clipboard")
             }
         }
     }
