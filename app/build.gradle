@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.javieric.ronswansonquotes"
-        minSdk 23
+        minSdk 28
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -61,7 +61,8 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.activity:activity-compose:1.7.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
