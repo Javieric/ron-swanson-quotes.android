@@ -2,7 +2,7 @@ package com.javieric.ronswansonquotes.di
 
 import com.javieric.ronswansonquotes.MainActivity
 import com.javieric.ronswansonquotes.MainViewModel
-import com.javieric.ronswansonquotes.QuotesUseCase
+import com.javieric.ronswansonquotes.RequestQuoteUseCase
 import dagger.Component
 
 @Component(
@@ -12,5 +12,5 @@ interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
     fun inject(activity: MainViewModel)
-    fun inject(quotesUseCase: QuotesUseCase)
+    fun inject(requestQuoteUseCase: RequestQuoteUseCase)
 }

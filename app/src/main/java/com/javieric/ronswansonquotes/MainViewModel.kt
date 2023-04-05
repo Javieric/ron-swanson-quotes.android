@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +21,7 @@ class MainViewModel (
 ): AndroidViewModel(application) {
 
     @Inject
-    lateinit var quotesUseCase: IQuotesUseCase
+    lateinit var quotesUseCase: IRequestQuoteUseCase
 
     private var _quoteState = MutableStateFlow<QuoteState>(QuoteState.Loading)
     val quoteState: StateFlow<QuoteState> = _quoteState

@@ -2,6 +2,11 @@ package com.javieric.ronswansonquotes
 
 import javax.inject.Inject
 
+interface IQuotesAPIService {
+
+    suspend fun requestNewQuote(): String
+}
+
 class QuotesAPIService @Inject constructor(
     private val api: IQuotesAPI,
 ) : IQuotesAPIService {

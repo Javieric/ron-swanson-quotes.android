@@ -3,9 +3,14 @@ package com.javieric.ronswansonquotes
 import com.javieric.ronswansonquotes.di.DaggerApplicationComponent
 import javax.inject.Inject
 
-class QuotesUseCase @Inject constructor(
+interface IRequestQuoteUseCase {
+
+    suspend fun requestQuote(): String
+}
+
+class RequestQuoteUseCase @Inject constructor(
     private val quotesAPIService: IQuotesAPIService,
-): IQuotesUseCase {
+): IRequestQuoteUseCase {
 
     init {
         DaggerApplicationComponent.builder().build().inject(this)
