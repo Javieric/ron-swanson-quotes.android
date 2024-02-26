@@ -1,9 +1,5 @@
 package com.javieric.composables
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -26,21 +22,18 @@ internal class ButtonPanelComposableTest {
 
         val newQuoteMenuIcon = ButtonPanelItem(
             title = "New Quote",
-            image = Icons.Default.Refresh,
-            onClick = {  }
-        )
+            image = androidx.appcompat.R.drawable.abc_ic_menu_share_mtrl_alpha
+        ) { }
 
         val copyMenuIcon = ButtonPanelItem(
             title = "Copy",
-            image = Icons.Default.Edit,
-            onClick = {  }
-        )
+            image = androidx.appcompat.R.drawable.abc_ic_menu_cut_mtrl_alpha
+        ) { }
 
         val shareMenuIcon = ButtonPanelItem(
             title = "Share",
-            image = Icons.Default.Share,
-            onClick = {  }
-        )
+            image = androidx.appcompat.R.drawable.abc_ic_menu_copy_mtrl_am_alpha
+        ) { }
 
         val list =  listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon)
 
@@ -70,9 +63,8 @@ internal class ButtonPanelComposableTest {
 
         val shareMenuIcon = ButtonPanelItem(
             title = "Share",
-            image = Icons.Default.Share,
-            onClick = { buttonClicked = true }
-        )
+            image = androidx.appcompat.R.drawable.abc_ic_menu_copy_mtrl_am_alpha
+        ) { buttonClicked = true }
 
         val list = listOf(shareMenuIcon)
 

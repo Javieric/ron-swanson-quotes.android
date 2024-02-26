@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class MainViewModel (
     application: Application
 ): AndroidViewModel(application) {
@@ -44,7 +43,6 @@ class MainViewModel (
             viewModelScope.launch(Dispatchers.IO) {
 
                 _quoteState.value = try {
-//                    delay(1000)
 
                     Timber.d("requestQuote() - requesting quote")
                     QuoteState.Success(quotesUseCase.requestQuote())
@@ -66,11 +64,11 @@ class MainViewModel (
         Timber.d("copyToClipboard()")
         if (quoteState.value is QuoteState.Success) {
 
-            (quoteState.value as? QuoteState.Success)?.quote?.let {
+            (quoteState.value as QuoteState.Success).quote.let { quote ->
 
-                Timber.d("copyToClipboard() - quote: $it")
+                Timber.d("copyToClipboard() - quote: $quote")
                 val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clipData = ClipData.newPlainText("text", "\"$it\" - Ron Swanson")
+                val clipData = ClipData.newPlainText("text", "\"$quote\" - Ron Swanson")
 
                 clipData?.let {
                     clipboardManager.setPrimaryClip(it)

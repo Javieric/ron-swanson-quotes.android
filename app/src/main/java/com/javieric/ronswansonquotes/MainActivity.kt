@@ -12,11 +12,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -59,21 +54,18 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         val newQuoteMenuIcon = ButtonPanelItem(
             title = "New Quote",
-            image = Icons.Default.Refresh,
-            onClick = { viewModel.requestQuote() }
-        )
+            image = R.drawable.next_right_arrow_svgrepo_com
+        ) { viewModel.requestQuote() }
 
         val copyMenuIcon = ButtonPanelItem(
             title = "Copy",
-            image = Icons.Default.Edit,
-            onClick = { viewModel.copyToClipboard(this) }
-        )
+            image = R.drawable.copy_svgrepo_com
+        ) { viewModel.copyToClipboard(this) }
 
         val shareMenuIcon = ButtonPanelItem(
             title = "Share",
-            image = Icons.Default.Share,
-            onClick = { share() }
-        )
+            image = R.drawable.share_1100_svgrepo_com
+        ) { share() }
 
 //        val favouriteMenuIcon = ButtonPanelItem(
 //            title = "Favourite",
@@ -285,27 +277,23 @@ fun ErrorDarkThemePreview() {
 private fun generateMenuIcons(): List<ButtonPanelItem> {
     val newQuoteMenuIcon = ButtonPanelItem(
         title = "New Quote",
-        image = Icons.Default.Refresh,
-        onClick = {  }
-    )
+        image = R.drawable.next_right_arrow_svgrepo_com
+    ) { }
 
     val copyMenuIcon = ButtonPanelItem(
         title = "Copy",
-        image = Icons.Default.Edit,
-        onClick = {  }
-    )
+        image = R.drawable.copy_svgrepo_com
+    ) { }
 
     val shareMenuIcon = ButtonPanelItem(
         title = "Share",
-        image = Icons.Default.Share,
-        onClick = {  }
-    )
+        image = R.drawable.share_1100_svgrepo_com
+    ) { }
 
-    val favouriteMenuIcon = ButtonPanelItem(
-        title = "Favourite",
-        image = Icons.Default.Favorite,
-        onClick = {  }
-    )
+//    val favouriteMenuIcon = ButtonPanelItem(
+//        title = "Favourite",
+//        image = Icons.Default.Favorite
+//    ) { }
 
     return listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon/*, favouriteMenuIcon*/)
 }

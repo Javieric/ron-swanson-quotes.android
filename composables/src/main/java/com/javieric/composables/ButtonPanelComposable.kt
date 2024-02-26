@@ -2,13 +2,10 @@ package com.javieric.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.javieric.composables.theme.RonSwansonQuotesTheme
 
@@ -26,7 +23,7 @@ fun ButtonPanelComposable(
         items.forEach {
 
             ButtonComposable(
-                image = it.image,
+                image = ImageVector.vectorResource(id = it.image),
                 onClick = it.onClick,
                 title = it.title,
             )
@@ -36,7 +33,7 @@ fun ButtonPanelComposable(
 
 data class ButtonPanelItem(
     val title: String,
-    val image: ImageVector,
+    val image: Int,
     val onClick: () -> Unit,
 )
 
@@ -46,21 +43,18 @@ fun ButtonPanelPreview() {
 
     val item1 = ButtonPanelItem(
         title = "title1",
-        image = Icons.Default.Add,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_share_mtrl_alpha
+    ) { }
 
     val item2 = ButtonPanelItem(
         title = "title2",
-        image = Icons.Default.List,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_cut_mtrl_alpha
+    ) { }
 
     val item3 = ButtonPanelItem(
         title = "title3",
-        image = Icons.Default.AccountBox,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_copy_mtrl_am_alpha
+    ) { }
     RonSwansonQuotesTheme {
         ButtonPanelComposable(
             items = listOf(item1, item2, item3)
@@ -74,21 +68,18 @@ fun ButtonPanelDarkThemePreview() {
 
     val item1 = ButtonPanelItem(
         title = "title1",
-        image = Icons.Default.Add,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_share_mtrl_alpha
+    ) { }
 
     val item2 = ButtonPanelItem(
         title = "title2",
-        image = Icons.Default.List,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_cut_mtrl_alpha
+    ) { }
 
     val item3 = ButtonPanelItem(
         title = "title3",
-        image = Icons.Default.AccountBox,
-        onClick = { }
-    )
+        image = androidx.appcompat.R.drawable.abc_ic_menu_copy_mtrl_am_alpha
+    ) { }
     RonSwansonQuotesTheme(
         darkTheme = true
     ) {
