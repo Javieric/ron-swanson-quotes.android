@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.javieric.composables.*
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         DaggerApplicationComponent.builder().build().inject(this)
 
         super.onCreate(savedInstanceState)
+
+        installSplashScreen()
 
         var quoteState: QuoteState?
 
@@ -153,7 +156,7 @@ private fun QuotesUI(
                         } else {
                             newQuoteAnimation()
                         }
-                    }
+                    }, label = ""
                 ) { targetState ->
 
                     when (targetState) {
