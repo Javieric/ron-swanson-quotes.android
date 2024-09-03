@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -49,8 +50,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         installSplashScreen()
 
-        var quoteState: QuoteState?
-
         viewModel.clipboardLiveData.observe(this) {
             onQuoteCopiedToClipboard()
         }
@@ -79,16 +78,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val menuIconList = listOf(newQuoteMenuIcon, copyMenuIcon, shareMenuIcon, /*favouriteMenuIcon*/)
 
         lifecycleScope.launchWhenCreated {
-            viewModel.quoteState.collect {
-                quoteState = it
 
-                setContent {
-                    RonSwansonQuotesTheme {
-                        QuotesUI(
-                            quoteState = quoteState,
-                            menuIconList = menuIconList
-                        )
-                    }
+            setContent {
+                RonSwansonQuotesTheme {
+
+                    val quoteState = viewModel.quoteState.collectAsState(initial = QuoteState.Loading)
+
+                    QuotesUI(
+                        quoteState = quoteState.value,
+                        menuIconList = menuIconList
+                    )
                 }
             }
         }
